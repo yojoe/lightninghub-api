@@ -1,0 +1,8 @@
+#%RAML 1.0 Library
+types:
+  BOLT-11:
+    type: string
+    pattern: ^ln(bc|tb)[1-9][0-9]*[munp]1[ac-hj-np-z02-9]{6,}$
+    description: |
+      bech32 encoded bitcoin payment request according to the [BOLT-11](https://github.com/lightningnetwork/lightning-rfc/blob/master/11-payment-encoding.md)
+      specification.

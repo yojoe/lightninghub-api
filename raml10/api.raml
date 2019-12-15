@@ -1,0 +1,65 @@
+#%RAML 1.0
+title: LightningHub
+version: v1
+baseUri: http://api.bluewallet.io/{version}
+protocols: [HTTP, HTTPS]
+mediaType: application/json
+securedBy: [passthrough]
+documentation:
+ - !include documentation/home.raml
+ - !include documentation/authentication.raml
+ - !include documentation/error-codes.raml
+uses:
+  base-types: types/base-types.raml
+  bluewallet-types: types/bluewallet-types.raml
+securitySchemes:
+  passthrough: !include securitySchemes/passthrough.raml
+traits:
+  paged: !include ./traits/paged.raml
+  rateLimited: !include traits/rateLimited.raml
+resourceTypes:
+  GetInfo: !include resourceTypes/getinfo.raml
+  Create: !include resourceTypes/create.raml
+  Auth: !include resourceTypes/auth.raml
+  Balance: !include resourceTypes/balance.raml
+  GetBTC: !include resourceTypes/getbtc.raml
+  GetPending: !include ./resourceTypes/getpending.raml
+  AddInvoice: !include ./resourceTypes/addinvoice.raml
+  PayInvoice: !include ./resourceTypes/payinvoice.raml
+  GetTxs: !include ./resourceTypes/gettxs.raml
+  GetUserInvoices: !include ./resourceTypes/getuserinvoices.raml
+  DecodeInvoice: !include ./resourceTypes/decodeinvoice.raml
+/getinfo:
+  type: GetInfo
+  securedBy: null
+/create:
+  type: Create
+  securedBy: null
+  is: [rateLimited]
+/auth:
+  type: Auth
+  securedBy: null
+  is: [rateLimited]
+/balance:
+  type: Balance
+  is: [rateLimited]
+/getbtc:
+  type: GetBTC
+/getpending:
+  type: GetPending
+  is: [rateLimited]
+/addinvoice:
+  type: AddInvoice
+  is: [rateLimited]
+/payinvoice:
+  type: PayInvoice
+  is: [rateLimited]
+/gettxs:
+  type: GetTxs
+  is: [paged, rateLimited]
+/getuserinvoices:
+  type: GetUserInvoices
+  is: [paged, rateLimited]
+/decodeinvoice:
+  type: DecodeInvoice
+  is: [rateLimited]

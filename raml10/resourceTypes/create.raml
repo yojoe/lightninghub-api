@@ -1,0 +1,33 @@
+#%RAML 1.0 ResourceType
+uses:
+  base-types: ../types/base-types.raml
+displayName: Create new account
+description: |
+  Create a new custody account on the LightningHub. Each account has it's own
+  spendable balance which is managed via an internal ledger (database).
+post:
+  description: Send account creation request
+  body:
+    application/json:
+      displayName: Create Account Request
+      properties:
+        partnerid:
+          type: string
+          pattern: ^bluewallet$
+        accounttype:
+          type: string
+          enum: [common, test]
+      example:
+        partnerid: bluewallet
+        accounttype: common
+  responses:
+    200:
+      body:
+        application/json:
+          displayName: Create Account Response
+          properties:
+            login: base-types.HexString
+            password: base-types.HexString
+          example:
+            login: 04f8996da763b7a969b1
+            password: 5e884898da28047151d0

@@ -1,0 +1,141 @@
+#%RAML 1.0 Library
+uses:
+  base-types: base-types.raml
+  bolt-types: bolt-types.raml
+  annotation-types: annotation-types.raml
+types:
+  Balance:
+    type: object
+    properties:
+      AvailableBalance:
+        type: integer
+        displayName: BTC balance in satoshis
+        minimum: 0
+  BTCAddressItem:
+    type: object
+    properties:
+      address: base-types.Bech32Address
+  BTCTransaction:
+    type: object
+    properties:
+      amount: number
+      account: string
+      address: base-types.BTCAddress
+      category: string
+      confirmations:
+        type: integer
+        minimum: 0
+      blockhash: base-types.HexString
+      blockindex:
+        type: integer
+        minimum: 0
+      blocktime:
+        type: integer
+        minimum: 0
+      txid: base-types.HexString
+      walletconflicts: any
+      time:
+        type: integer
+        minimum: 0
+      timereceived:
+        type: integer
+        minimum: 0
+  ErrorRespBody:
+    type: object
+    properties:
+      error: boolean
+      code:
+        type: integer
+        minimum: 0
+      message: string
+  BadAuthRespBody:
+    type: ErrorRespBody
+    description: Error response body when authentication failed
+    example:
+      error: true
+      code: 1
+      message: bad auth
+  LNDSendResponse:
+    type: object
+    properties:
+      payment_error: string
+      payment_preimage: base-types.Buffer
+      payment_route: object
+      payment_hash: base-types.Buffer
+  LNDPayReq:
+    type: object
+    properties:
+      destination: string
+      payment_hash: base-types.HexString
+      num_satoshis: integer
+      timestamp: integer
+      expiry: integer
+      description: string
+      description_hash: base-types.HexString
+      fallback_addr: string
+      cltv_expiry: integer
+      route_hints?: any
+  Payment:
+    type: object
+    description: Details of a payment
+    properties:
+      timestamp:
+        type: integer
+      type:
+        enum:
+          - bitcoind_tx
+          - paid_invoice
+          - user_invoice
+      value:
+        type: integer
+        minimum: 0
+      fee:
+        type: integer
+        minimum: 0
+      memo?: string
+  Invoice:
+    type: object
+    description: Details of an invoice
+    properties:
+      timestamp:
+        type: integer
+      type:
+        enum:
+          - user_invoice
+      amt:
+        type: integer
+      description:
+        type: string
+      ispaid:
+        type: boolean
+      expire_time:
+        type: integer
+      payment_hash: base-types.HexString
+      payment_request:
+        type: bolt-types.BOLT-11
+      r_hash:
+        (annotation-types.questionable): |
+          This property is an implementation detail of the LND rpc api.
+          Why as a buffer representation? Wouldn't a hexadecimal string be
+          sufficient?
+        type: base-types.Buffer
+        description: |
+          The payment hash of the invoice. For lookup purposes.
+      add_index:
+        (annotation-types.questionable): |
+          This property is an implementation detail of the LND rpc api.
+          Why is it exposed to Bluewallet clients? It's potentially
+          sensitive information that is leaked.
+        type: integer
+        description: |
+          The "add" index of this invoice. Each newly created invoice will
+          increment this index making it monotonically increasing. Callers
+          to the SubscribeInvoices call can use this to instantly get
+          notified of all added invoices with an add_index greater than
+          this one.
+      pay_req:
+        (annotation-types.deprecated):
+        type: bolt-types.BOLT-11
+        description: |
+          Same as `payment_request`. Still here for client backwards
+          compatibility.

@@ -1,0 +1,19 @@
+#%RAML 1.0 SecurityScheme
+uses:
+  bluewallet-types: ../types/bluewallet-types.raml
+type: Pass Through
+displayName: Access Token (Pass Through)
+description: |
+  This API supports Pass Through Authentication via the `Authorization` header.
+describedBy:
+  headers:
+    Authorization:
+      type: base-types.HexString
+      description: The `access_token` obtained via the /auth request
+  responses:
+    401:
+      description: |
+        Error response when wrong credentials where provided.
+      body:
+        application/json:
+          type: bluewallet-types.BadAuthRespBody

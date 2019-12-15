@@ -1,0 +1,16 @@
+#%RAML 1.0 ResourceType
+uses:
+  bluewallet-types: ../types/bluewallet-types.raml
+displayName: Show Funding Address
+description: |
+  Get an on-chain bitcoin deposit address for the authenticated user.
+  Deposits will be credited to the user's custody account balance.
+get:
+  description: Send deposit address request
+  responses:
+    200:
+      body:
+        application/json:
+          type: bluewallet-types.BTCAddressItem[]
+          example:
+            - address: tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx

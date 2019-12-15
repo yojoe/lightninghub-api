@@ -1,0 +1,67 @@
+#%RAML 1.0 ResourceType
+uses:
+  bluewallet-types: ../types/bluewallet-types.raml
+  annotation-types: ../types/annotation-types.raml
+displayName: Show Invoices
+description: |
+  Show Lightning invoices created by the authenticated user.
+get:
+  description: |
+    Get a list of Lightning invoices along with their payment status details
+    for the authenticated user's custody account.
+  responses:
+    200:
+      body:
+        application/json:
+          displayName: Show Invoices Response
+          type: bluewallet-types.Invoice[]
+          (annotation-types.questionable): |
+            This resource currently exposes raw lnd RPC types. Not
+            all of that data is used by the client (Bluewallet App).
+          example:
+            - # Lightning Invoice
+              timestamp: 1535054434
+              type: user_invoice
+              amt: 12
+              description: tip
+              ispaid: true
+              expire_time: 3600
+              payment_hash: 18cfd986f49569a3276624dbc02bdc7fdfa57053f9dd0d4e7fa5902e9c926de5
+              payment_request: lnbc10u1pwenn70pp5c25zh2denvxvthesgtt6kphgudck95v7xewnf2tmyujp50d0svksdqqcqzpgcale3550tlvx75pjj59rtg6lukvs52s2al7v0xnmry9399eqe03sx3nlp9758al5l7j6xrzlr49q2c9cux4gl7fart2j9ammfp4f26cqxtyghg
+              add_index: 104719
+              r_hash:
+                type: Buffer
+                data:
+                  - 194
+                  - 168
+                  - 43
+                  - 169
+                  - 185
+                  - 155
+                  - 12
+                  - 197
+                  - 223
+                  - 48
+                  - 66
+                  - 215
+                  - 171
+                  - 6
+                  - 232
+                  - 227
+                  - 113
+                  - 98
+                  - 209
+                  - 158
+                  - 54
+                  - 93
+                  - 52
+                  - 169
+                  - 123
+                  - 39
+                  - 36
+                  - 26
+                  - 61
+                  - 175
+                  - 131
+                  - 45
+              pay_req: lnbc10u1pwenn70pp5c25zh2denvxvthesgtt6kphgudck95v7xewnf2tmyujp50d0svksdqqcqzpgcale3550tlvx75pjj59rtg6lukvs52s2al7v0xnmry9399eqe03sx3nlp9758al5l7j6xrzlr49q2c9cux4gl7fart2j9ammfp4f26cqxtyghg

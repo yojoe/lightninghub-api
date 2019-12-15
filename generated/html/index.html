@@ -1,0 +1,383 @@
+<!DOCTYPE HTML><html><head><title>LightningHub API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 7.5.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+  $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
+
+  $('[data-toggle]').click(function() {
+    var selector = $(this).data('target') + ' pre code';
+    $(selector).each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
+
+  // open modal on hashes like #_action_get
+  $(window).bind('hashchange', function(e) {
+    var anchor_id = document.location.hash.substr(1); //strip #
+    var element = $('#' + anchor_id);
+
+    // do we have such element + is it a modal?  --> show it
+    if (element.length && element.hasClass('modal')) {
+      element.modal('show');
+    }
+  });
+
+  // execute hashchange on first page load
+  $(window).trigger('hashchange');
+
+  // remove url fragment on modal hide
+  $('.modal').on('hidden.bs.modal', function() {
+    try {
+      if (history && history.replaceState) {
+          history.replaceState({}, '', '#');
+      }
+    } catch(e) {}
+  });
+});
+    </script><style>
+      .hljs {
+  background: transparent;
+}
+.parent {
+  color: #999;
+}
+.list-group-item > .badge {
+  float: none;
+  margin-right: 6px;
+}
+.panel-title > .methods {
+  float: right;
+}
+.badge {
+  border-radius: 0;
+  text-transform: uppercase;
+  width: 70px;
+  font-weight: normal;
+  color: #f3f3f6;
+  line-height: normal;
+}
+.badge_get {
+  background-color: #63a8e2;
+}
+.badge_post {
+  background-color: #6cbd7d;
+}
+.badge_put {
+  background-color: #22bac4;
+}
+.badge_delete {
+  background-color: #d26460;
+}
+.badge_patch {
+  background-color: #ccc444;
+}
+.list-group,
+.panel-group {
+  margin-bottom: 0;
+}
+.panel-group .panel+.panel-white {
+  margin-top: 0;
+}
+.panel-group .panel-white {
+  border-bottom: 1px solid #F5F5F5;
+  border-radius: 0;
+}
+.panel-white:last-child {
+  border-bottom-color: white;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.panel-white .panel-heading {
+  background: white;
+}
+.tab-pane ul {
+  padding-left: 2em;
+}
+.tab-pane h1 {
+  font-size: 1.3em;
+}
+.tab-pane h2 {
+  font-size: 1.2em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #ddd;
+}
+.tab-pane h3 {
+  font-size: 1.1em;
+}
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+#sidebar {
+  margin-top: 30px;
+  padding-right: 5px;
+  overflow: auto;
+  height: 90%;
+}
+.top-resource-description {
+  border-bottom: 1px solid #ddd;
+  background: #fcfcfc;
+  padding: 15px 15px 0 15px;
+  margin: -15px -15px 10px -15px;
+}
+.resource-description {
+  border-bottom: 1px solid #fcfcfc;
+  background: #fcfcfc;
+  padding: 15px 15px 0 15px;
+  margin: -15px -15px 10px -15px;
+}
+.resource-description p:last-child {
+  margin: 0;
+}
+.list-group .badge {
+  float: left;
+}
+.method_description {
+  margin-left: 85px;
+}
+.method_description p:last-child {
+  margin: 0;
+}
+.list-group-item {
+  cursor: pointer;
+}
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+pre code {
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+.items {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+}
+.examples {
+  margin-left: 0.5em;
+}
+.resource-modal li > ul {
+  margin-bottom: 1em;
+}
+.required {
+  color: #f00;
+}
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>LightningHub API documentation <small>version v1</small></h1><p>http://api.bluewallet.io/{version}</p><ul><li><strong>version</strong>: <em><span class="required">required</span>(v1)</em></li></ul><h3 id="home"><a href="#home">Home</a></h3><p>Welcome to the <em>LightningHub API</em> Documentation. The <em>LightningHub API</em> allows you to connect your Bitcoin/Lightning <a href="https://bluewallet.io">Bluewallet App</a> and serve multiple user accounts via a shared Lightning Node.</p><h3 id="authentication"><a href="#authentication">Authentication</a></h3><p>Most of the API requests require authentication. This is done via a <em>request header</em> named <code>Authorization:</code> containing an <strong>access token</strong>, which has to be send along with every request. To obtain an access token, the following steps have to be performed:</p><ol><li>Create an <strong>account</strong> via the <code>/create</code> resource.</li><li>Create an <strong>access token</strong> via the <code>/auth</code> resource using the credentials (login/password) returned in step 1.</li><li>Provide the <strong>access token</strong> returned in step 2 as the value of the <code>Authorization</code> header in every following request.</li></ol><h3 id="error_codes"><a href="#error_codes">Error codes</a></h3><p>This API returns errors as a JSON object in the following format:</p><pre><code class="language-json">{
+   "error": true,
+   "code": &lt;INTEGER&gt;,
+   "message": "&lt;DESCRIPTION&gt;",
+}</code></pre><p>The following error <code>codes</code> are defined:</p><ul><li><code>1</code> : bad authentication</li><li><code>2</code> : not enough balance</li><li><code>4</code> : not a valid invoice</li><li><code>6</code> : server fault</li><li><code>7</code> : Lightning node failure</li><li><code>8</code> : bad arguments</li><li><code>9</code> : payment in transit</li><li><code>10</code> : payment failed</li></ul></div><div class="panel panel-default"><div class="panel-heading"><h3 id="getinfo" class="panel-title">Lighting Node Info</h3></div><div class="panel-body"><div class="top-resource-description"><p>Get status information about the connected Lightning node.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_getinfo"><span class="parent"></span>/getinfo</a> <span class="methods"><a href="#getinfo_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_getinfo" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#getinfo_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Send status information request</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="getinfo_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/getinfo</h4></div><div class="modal-body"><div class="alert alert-info"><p>Send status information request</p></div><ul class="nav nav-tabs"><li class="active"><a href="#getinfo_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="getinfo_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>identity_pubkey</strong>: <em>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>alias</strong>: <em>(string)</em></li><li><strong>uris</strong>: <em>(array of )</em></li><li><strong>version</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>num_pending_channels</strong>: <em>(integer)</em></li><li><strong>num_active_channels</strong>: <em>(integer)</em></li><li><strong>num_inactive_channels</strong>: <em>(integer)</em></li><li><strong>num_peers</strong>: <em>(integer)</em></li><li><strong>synced_to_chain</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>block_height</strong>: <em><span class="required">required</span>(integer)</em></li><li><strong>block_hash</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>best_header_timestamp</strong>: <em><span class="required">required</span>(integer)</em></li><li><strong>testnet</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>chains</strong>: <em><span class="required">required</span>(array of )</em></li></ul></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="create" class="panel-title">Create new account</h3></div><div class="panel-body"><div class="top-resource-description"><p>Create a new custody account on the LightningHub. Each account has it&#39;s own spendable balance which is managed via an internal ledger (database).</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_create"><span class="parent"></span>/create</a> <span class="methods"><a href="#create_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_create" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#create_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Send account creation request</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="create_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/create</h4></div><div class="modal-body"><div class="alert alert-info"><p>Send account creation request</p></div><ul class="nav nav-tabs"><li class="active"><a href="#create_post_request" data-toggle="tab">Request</a></li><li><a href="#create_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="create_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>partnerid</strong>: <em><span class="required">required</span>(string - pattern: ^bluewallet$)</em></li><li><strong>accounttype</strong>: <em><span class="required">required</span>(one of common, test)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "partnerid": "bluewallet",
+  "accounttype": "common"
+}</code></pre></div></div><div class="tab-pane" id="create_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>login</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>password</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "login": "04f8996da763b7a969b1",
+  "password": "5e884898da28047151d0"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/429" target="_blank">429</a></h2><p>Error response when the rate limit of requests was reached.</p><h3>Headers</h3><ul><li><strong>X-Ratelimit-Limit</strong>: <em><span class="required">required</span>(integer)</em><p>The request limit per time window</p></li><li><strong>X-Ratelimit-Remaining</strong>: <em><span class="required">required</span>(integer)</em><p>The number of requests left for the time window</p></li><li><strong>X-Ratelimit-Reset</strong>: <em><span class="required">required</span>(integer)</em><p>The remaining window before the rate limit resets in UTC epoch seconds</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Too many requests, please try again later.</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="auth" class="panel-title">Get access token</h3></div><div class="panel-body"><div class="top-resource-description"><p>Create an access token using your account credentials (login/password), which is needed for most of the API calls.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_auth"><span class="parent"></span>/auth</a> <span class="methods"><a href="#auth_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_auth" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#auth_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Send user authentication request</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="auth_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/auth</h4></div><div class="modal-body"><div class="alert alert-info"><p>Send user authentication request</p></div><ul class="nav nav-tabs"><li class="active"><a href="#auth_post_request" data-toggle="tab">Request</a></li><li><a href="#auth_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="auth_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>login</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>password</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>refresh_token</strong>: <em>(string - pattern: ^[0-9|a-f]+$)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "login": "04f8996da763b7a969b1",
+  "password": "5e884898da28047151d0"
+}</code></pre></div></div><div class="tab-pane" id="auth_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Successful user authentication response which provides an <code>access token</code> that needs to be send along with all requests that require authentication.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>access_token</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>refresh_token</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "access_token": "bf3771fdebf08fd83a3b4cbe2f0aa3ef4cf957b3",
+  "refresh_token": "f77a47bb198f496c5cb03cf06ac544a6e194637d"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Failed user authentication response when wrong credentials where provided.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 1,
+  "message": "bad auth"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/429" target="_blank">429</a></h2><p>Error response when the rate limit of requests was reached.</p><h3>Headers</h3><ul><li><strong>X-Ratelimit-Limit</strong>: <em><span class="required">required</span>(integer)</em><p>The request limit per time window</p></li><li><strong>X-Ratelimit-Remaining</strong>: <em><span class="required">required</span>(integer)</em><p>The number of requests left for the time window</p></li><li><strong>X-Ratelimit-Reset</strong>: <em><span class="required">required</span>(integer)</em><p>The remaining window before the rate limit resets in UTC epoch seconds</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Too many requests, please try again later.</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="balance" class="panel-title">Show Account Balance</h3></div><div class="panel-body"><div class="top-resource-description"><p>Show spendable custody account balance of the authenticated user.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_balance"><span class="parent"></span>/balance</a> <span class="methods"><a href="#balance_get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_balance" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#balance_get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Send balance information request</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="balance_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/balance</h4></div><div class="modal-body"><div class="alert alert-info"><p>Send balance information request</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>Access Token (Pass Through)</b><p>This API supports Pass Through Authentication via the <code>Authorization</code> header.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#balance_get_response" data-toggle="tab">Response</a></li><li><a href="#balance_get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="balance_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>BTC</strong>: <em><span class="required">required</span>(object)</em><ul><li><strong>AvailableBalance</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li></ul></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "BTC": {
+    "AvailableBalance": 0
+  }
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/429" target="_blank">429</a></h2><p>Error response when the rate limit of requests was reached.</p><h3>Headers</h3><ul><li><strong>X-Ratelimit-Limit</strong>: <em><span class="required">required</span>(integer)</em><p>The request limit per time window</p></li><li><strong>X-Ratelimit-Remaining</strong>: <em><span class="required">required</span>(integer)</em><p>The number of requests left for the time window</p></li><li><strong>X-Ratelimit-Reset</strong>: <em><span class="required">required</span>(integer)</em><p>The remaining window before the rate limit resets in UTC epoch seconds</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Too many requests, please try again later.</code></pre></div></div><div class="tab-pane" id="balance_get_securedby"><h1>Secured by Access Token (Pass Through)</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em><p>The <code>access_token</code> obtained via the /auth request</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Error response when wrong credentials where provided.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 1,
+  "message": "bad auth"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="getbtc" class="panel-title">Show Funding Address</h3></div><div class="panel-body"><div class="top-resource-description"><p>Get an on-chain bitcoin deposit address for the authenticated user. Deposits will be credited to the user&#39;s custody account balance.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_getbtc"><span class="parent"></span>/getbtc</a> <span class="methods"><a href="#getbtc_get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_getbtc" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#getbtc_get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Send deposit address request</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="getbtc_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/getbtc</h4></div><div class="modal-body"><div class="alert alert-info"><p>Send deposit address request</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>Access Token (Pass Through)</b><p>This API supports Pass Through Authentication via the <code>Authorization</code> header.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#getbtc_get_response" data-toggle="tab">Response</a></li><li><a href="#getbtc_get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="getbtc_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of object</p><p><strong>Items</strong>: BTCAddressItem</p><div class="items"><ul><li><strong>address</strong>: <em><span class="required">required</span>(string - pattern: ^(bc|tb)1[ac-hj-np-z02-9]{6,}$)</em></li></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "address": "tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx"
+  }
+]</code></pre></div></div><div class="tab-pane" id="getbtc_get_securedby"><h1>Secured by Access Token (Pass Through)</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em><p>The <code>access_token</code> obtained via the /auth request</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Error response when wrong credentials where provided.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 1,
+  "message": "bad auth"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="getpending" class="panel-title">Show Pending Deposits</h3></div><div class="panel-body"><div class="top-resource-description"><p>Show on-chain funding transactions with less than 3 confirmations for the authenticated user&#39;s account. Deposits will only be credited to the user&#39;s spendable account balance after the funding transaction received 3 confirmations.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_getpending"><span class="parent"></span>/getpending</a> <span class="methods"><a href="#getpending_get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_getpending" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#getpending_get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Get a list of pending deposits along with their details for the authenticated user&#39;s custody account.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="getpending_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/getpending</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of pending deposits along with their details for the authenticated user&#39;s custody account.</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>Access Token (Pass Through)</b><p>This API supports Pass Through Authentication via the <code>Authorization</code> header.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#getpending_get_response" data-toggle="tab">Response</a></li><li><a href="#getpending_get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="getpending_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of object</p><p><strong>Items</strong>: BTCTransaction</p><div class="items"><ul><li><strong>amount</strong>: <em><span class="required">required</span>(number)</em></li><li><strong>account</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>address</strong>: <em><span class="required">required</span>(union of base-types.Base58Address or base-types.Bech32Address)</em></li><li><strong>category</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>confirmations</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>blockhash</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>blockindex</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>blocktime</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>txid</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>walletconflicts</strong>: <em><span class="required">required</span>(any)</em></li><li><strong>time</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>timereceived</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "amount": 0.00078061,
+    "account": "521172",
+    "address": "3F9seBGCJZQ4WJJHwGhrxeGXCGbrm5SNpF",
+    "category": "receive",
+    "confirmations": 1,
+    "blockhash": "0000000000000000000edf18e9ece18e449c6d8eed1f729946b3531c32ee9f57",
+    "blockindex": 693,
+    "blocktime": 1535024914,
+    "txid": "28a74277e47c2d772ee8a40464209c90dce084f3b5de38a2f41b14c79e3bfc62",
+    "walletconflicts": [],
+    "time": 1535024434,
+    "timereceived": 1535024434
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/429" target="_blank">429</a></h2><p>Error response when the rate limit of requests was reached.</p><h3>Headers</h3><ul><li><strong>X-Ratelimit-Limit</strong>: <em><span class="required">required</span>(integer)</em><p>The request limit per time window</p></li><li><strong>X-Ratelimit-Remaining</strong>: <em><span class="required">required</span>(integer)</em><p>The number of requests left for the time window</p></li><li><strong>X-Ratelimit-Reset</strong>: <em><span class="required">required</span>(integer)</em><p>The remaining window before the rate limit resets in UTC epoch seconds</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Too many requests, please try again later.</code></pre></div></div><div class="tab-pane" id="getpending_get_securedby"><h1>Secured by Access Token (Pass Through)</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em><p>The <code>access_token</code> obtained via the /auth request</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Error response when wrong credentials where provided.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 1,
+  "message": "bad auth"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="addinvoice" class="panel-title">Create Lightning invoice</h3></div><div class="panel-body"><div class="top-resource-description"><p>Create BOLT-11 compatible Lightning invoices</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_addinvoice"><span class="parent"></span>/addinvoice</a> <span class="methods"><a href="#addinvoice_post"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_addinvoice" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#addinvoice_post'" class="list-group-item"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Request a BOLT-11 compatible Lightning invoice that can be paid by any other BOLT-11 compatible wallet. If the invoice is paid the respective amount will be credited to the authenticated user who created it.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="addinvoice_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/addinvoice</h4></div><div class="modal-body"><div class="alert alert-info"><p>Request a BOLT-11 compatible Lightning invoice that can be paid by any other BOLT-11 compatible wallet. If the invoice is paid the respective amount will be credited to the authenticated user who created it.</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>Access Token (Pass Through)</b><p>This API supports Pass Through Authentication via the <code>Authorization</code> header.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#addinvoice_post_request" data-toggle="tab">Request</a></li><li><a href="#addinvoice_post_response" data-toggle="tab">Response</a></li><li><a href="#addinvoice_post_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="addinvoice_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>amt</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em><p>Requested amount in milli-satoshi (msat)</p></li><li><strong>memo</strong>: <em>(string)</em><p>Optional, short description of purpose of payment, to attach along with the invoice. Used for record keeping purposes for the invoice&#39;s creator, and will also be set in the description field of the encoded payment request if the description_hash field is not being used.</p><h3>Annotations</h3><ul><li><strong>annotation-types.questionable</strong><pre><code>"For a custody lightning wallet this could leak potentially\nsensitive, private information to the operator of the service.\nBluewallet client implementations should at least inform their users\nabout this issue.\n"</code></pre></li></ul></li></ul></div><div class="tab-pane" id="addinvoice_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>payment_request</strong>: <em><span class="required">required</span>(string - pattern: ^ln(bc|tb)[1-9][0-9]*[munp]1[ac-hj-np-z02-9]{6,}$)</em><p>bech32 encoded bitcoin payment request according to the <a href="https://github.com/lightningnetwork/lightning-rfc/blob/master/11-payment-encoding.md">BOLT-11</a> specification.</p></li><li><strong>r_hash</strong>: <em><span class="required">required</span>(object)</em><p>The payment hash of the invoice. For lookup purposes.</p><h3>Annotations</h3><ul><li><strong>annotation-types.questionable</strong><pre><code>"This property is an implementation detail of the LND rpc api.\nWhy as a buffer representation? Wouldn't a hexadecimal string be\nsufficient?\n"</code></pre></li></ul><ul><li><strong>type</strong>: <em><span class="required">required</span>(string - pattern: ^Buffer$)</em></li><li><strong>data</strong>: <em><span class="required">required</span>(array of integer)</em></li></ul></li><li><strong>add_index</strong>: <em><span class="required">required</span>(integer)</em><p>The "add" index of this invoice. Each newly created invoice will increment this index making it monotonically increasing. Callers to the SubscribeInvoices call can use this to instantly get notified of all added invoices with an add_index greater than this one.</p><h3>Annotations</h3><ul><li><strong>annotation-types.questionable</strong><pre><code>"This property is an implementation detail of the LND rpc api.\nWhy is it exposed to Bluewallet clients? It's potentially\nsensitive information that is leaked.\n"</code></pre></li></ul></li><li><strong>pay_req</strong>: <em><span class="required">required</span>(string - pattern: ^ln(bc|tb)[1-9][0-9]*[munp]1[ac-hj-np-z02-9]{6,}$)</em><p>Same as <code>payment_request</code>. Still here for client backwards compatibility.</p><h3>Annotations</h3><ul><li><strong>annotation-types.deprecated</strong></li></ul></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "payment_request": "lnbc10u1pwenn70pp5c25zh2denvxvthesgtt6kphgudck95v7xewnf2tmyujp50d0svksdqqcqzpgcale3550tlvx75pjj59rtg6lukvs52s2al7v0xnmry9399eqe03sx3nlp9758al5l7j6xrzlr49q2c9cux4gl7fart2j9ammfp4f26cqxtyghg",
+  "add_index": 104719,
+  "r_hash": {
+    "type": "Buffer",
+    "data": [
+      194,
+      168,
+      43,
+      169,
+      185,
+      155,
+      12,
+      197,
+      223,
+      48,
+      66,
+      215,
+      171,
+      6,
+      232,
+      227,
+      113,
+      98,
+      209,
+      158,
+      54,
+      93,
+      52,
+      123,
+      39,
+      36,
+      26,
+      61,
+      175,
+      131,
+      45
+    ]
+  },
+  "pay_req": "lnbc10u1pwenn70pp5c25zh2denvxvthesgtt6kphgudck95v7xewnf2tmyujp50d0svksdqqcqzpgcale3550tlvx75pjj59rtg6lukvs52s2al7v0xnmry9399eqe03sx3nlp9758al5l7j6xrzlr49q2c9cux4gl7fart2j9ammfp4f26cqxtyghg"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/429" target="_blank">429</a></h2><p>Error response when the rate limit of requests was reached.</p><h3>Headers</h3><ul><li><strong>X-Ratelimit-Limit</strong>: <em><span class="required">required</span>(integer)</em><p>The request limit per time window</p></li><li><strong>X-Ratelimit-Remaining</strong>: <em><span class="required">required</span>(integer)</em><p>The number of requests left for the time window</p></li><li><strong>X-Ratelimit-Reset</strong>: <em><span class="required">required</span>(integer)</em><p>The remaining window before the rate limit resets in UTC epoch seconds</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Too many requests, please try again later.</code></pre></div></div><div class="tab-pane" id="addinvoice_post_securedby"><h1>Secured by Access Token (Pass Through)</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em><p>The <code>access_token</code> obtained via the /auth request</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Error response when wrong credentials where provided.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 1,
+  "message": "bad auth"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="payinvoice" class="panel-title">Pay Lightning invoices</h3></div><div class="panel-body"><div class="top-resource-description"><p>Pay BOLT-11 compatible Lightning invoices</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payinvoice"><span class="parent"></span>/payinvoice</a> <span class="methods"><a href="#payinvoice_post"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_payinvoice" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#payinvoice_post'" class="list-group-item"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Request a BOLT-11 compatible Lightning invoice to be paid by the custodian. If the payment is successful, the respective amount + a fee is substracted from the authenticated user&#39;s balance.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payinvoice_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/payinvoice</h4></div><div class="modal-body"><div class="alert alert-info"><p>Request a BOLT-11 compatible Lightning invoice to be paid by the custodian. If the payment is successful, the respective amount + a fee is substracted from the authenticated user&#39;s balance.</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>Access Token (Pass Through)</b><p>This API supports Pass Through Authentication via the <code>Authorization</code> header.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payinvoice_post_request" data-toggle="tab">Request</a></li><li><a href="#payinvoice_post_response" data-toggle="tab">Response</a></li><li><a href="#payinvoice_post_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payinvoice_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>invoice</strong>: <em><span class="required">required</span>(string - pattern: ^ln(bc|tb)[1-9][0-9]*[munp]1[ac-hj-np-z02-9]{6,}$)</em><p>bech32 encoded bitcoin payment request according to the <a href="https://github.com/lightningnetwork/lightning-rfc/blob/master/11-payment-encoding.md">BOLT-11</a> specification.</p></li><li><strong>amount</strong>: <em>(integer - minimum: 1)</em><p>For so called <em>tip invoices</em> only: The amount the payer wants to tip.</p></li></ul></div><div class="tab-pane" id="payinvoice_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>There doesn&#39;t seem to be a strict response schema for this method. Depending on wheter it was an internal payment or a real Lightning network payment, different response bodies are returned by the current implementation. Anyway, <a href="https://github.com/BlueWallet/BlueWallet/blob/ae8dac8ba9b14850228e0ce9ee9f874defbcd6c0/class/lightning-custodian-wallet.js#L114">current client implementation</a> doesn&#39;t seem to use any of the data provided in the response body.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object | bluewallet-types.LNDSendResponse | bluewallet-types.LNDPayReq</p><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  error: true,
+  code: 4,
+  message: &#39;not a valid invoice&#39;,
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  error: true
+  code: 2
+  message: not enough balance. Make sure you have at least 1% reserved for potential fees
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/429" target="_blank">429</a></h2><p>Error response when the rate limit of requests was reached.</p><h3>Headers</h3><ul><li><strong>X-Ratelimit-Limit</strong>: <em><span class="required">required</span>(integer)</em><p>The request limit per time window</p></li><li><strong>X-Ratelimit-Remaining</strong>: <em><span class="required">required</span>(integer)</em><p>The number of requests left for the time window</p></li><li><strong>X-Ratelimit-Reset</strong>: <em><span class="required">required</span>(integer)</em><p>The remaining window before the rate limit resets in UTC epoch seconds</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Too many requests, please try again later.</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  error: true,
+  code: 6,
+  message: &#39;Server fault&#39;,
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/502" target="_blank">502</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  error: true,
+  code: 10,
+  message: &#39;Payment failed. Does the receiver have enough inbound capacity?&#39;,
+}
+</code></pre></div></div><div class="tab-pane" id="payinvoice_post_securedby"><h1>Secured by Access Token (Pass Through)</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em><p>The <code>access_token</code> obtained via the /auth request</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Error response when wrong credentials where provided.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 1,
+  "message": "bad auth"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="gettxs" class="panel-title">Show Transaction History</h3></div><div class="panel-body"><div class="top-resource-description"><p>Show the transaction history of authenticated user&#39;s account.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_gettxs"><span class="parent"></span>/gettxs</a> <span class="methods"><a href="#gettxs_get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_gettxs" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#gettxs_get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Get a list of transactions (deposits and payments) along with their details for the authenticated user&#39;s custody account.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="gettxs_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/gettxs</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of transactions (deposits and payments) along with their details for the authenticated user&#39;s custody account.</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>Access Token (Pass Through)</b><p>This API supports Pass Through Authentication via the <code>Authorization</code> header.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#gettxs_get_request" data-toggle="tab">Request</a></li><li><a href="#gettxs_get_response" data-toggle="tab">Response</a></li><li><a href="#gettxs_get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="gettxs_get_request"><h3>Query Parameters</h3><ul><li><strong>limit</strong>: <em>(integer - default: 10 - minimum: 0)</em></li><li><strong>offset</strong>: <em>(integer - default: 0 - minimum: 0)</em></li></ul></div><div class="tab-pane" id="gettxs_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of (bluewallet-types.BTCTransaction | bluewallet-types.Payment)</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "amount": 0.00078061,
+    "account": "521172",
+    "address": "3F9seBGCJZQ4WJJHwGhrxeGXCGbrm5SNpF",
+    "category": "receive",
+    "confirmations": 5,
+    "blockhash": "0000000000000000000edf18e9ece18e449c6d8eed1f729946b3531c32ee9f57",
+    "blockindex": 693,
+    "blocktime": 1535024914,
+    "txid": "28a74277e47c2d772ee8a40464209c90dce084f3b5de38a2f41b14c79e3bfc62",
+    "walletconflicts": [],
+    "time": 1535024434,
+    "timereceived": 1535024434
+  },
+  {
+    "timestamp": 1535054434,
+    "type": "paid_invoice",
+    "value": 12,
+    "fee": 0,
+    "memo": "tip"
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/429" target="_blank">429</a></h2><p>Error response when the rate limit of requests was reached.</p><h3>Headers</h3><ul><li><strong>X-Ratelimit-Limit</strong>: <em><span class="required">required</span>(integer)</em><p>The request limit per time window</p></li><li><strong>X-Ratelimit-Remaining</strong>: <em><span class="required">required</span>(integer)</em><p>The number of requests left for the time window</p></li><li><strong>X-Ratelimit-Reset</strong>: <em><span class="required">required</span>(integer)</em><p>The remaining window before the rate limit resets in UTC epoch seconds</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Too many requests, please try again later.</code></pre></div></div><div class="tab-pane" id="gettxs_get_securedby"><h1>Secured by Access Token (Pass Through)</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em><p>The <code>access_token</code> obtained via the /auth request</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Error response when wrong credentials where provided.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 1,
+  "message": "bad auth"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="getuserinvoices" class="panel-title">Show Invoices</h3></div><div class="panel-body"><div class="top-resource-description"><p>Show Lightning invoices created by the authenticated user.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_getuserinvoices"><span class="parent"></span>/getuserinvoices</a> <span class="methods"><a href="#getuserinvoices_get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_getuserinvoices" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#getuserinvoices_get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Get a list of Lightning invoices along with their payment status details for the authenticated user&#39;s custody account.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="getuserinvoices_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/getuserinvoices</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of Lightning invoices along with their payment status details for the authenticated user&#39;s custody account.</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>Access Token (Pass Through)</b><p>This API supports Pass Through Authentication via the <code>Authorization</code> header.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#getuserinvoices_get_request" data-toggle="tab">Request</a></li><li><a href="#getuserinvoices_get_response" data-toggle="tab">Response</a></li><li><a href="#getuserinvoices_get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="getuserinvoices_get_request"><h3>Query Parameters</h3><ul><li><strong>limit</strong>: <em>(integer - default: 10 - minimum: 0)</em></li><li><strong>offset</strong>: <em>(integer - default: 0 - minimum: 0)</em></li></ul></div><div class="tab-pane" id="getuserinvoices_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of object</p><p><strong>Items</strong>: Invoice</p><div class="items"><ul><li><strong>timestamp</strong>: <em><span class="required">required</span>(integer)</em></li><li><strong>type</strong>: <em><span class="required">required</span>(user_invoice)</em></li><li><strong>amt</strong>: <em><span class="required">required</span>(integer)</em></li><li><strong>description</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>ispaid</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>expire_time</strong>: <em><span class="required">required</span>(integer)</em></li><li><strong>payment_hash</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>payment_request</strong>: <em><span class="required">required</span>(string - pattern: ^ln(bc|tb)[1-9][0-9]*[munp]1[ac-hj-np-z02-9]{6,}$)</em><p>bech32 encoded bitcoin payment request according to the <a href="https://github.com/lightningnetwork/lightning-rfc/blob/master/11-payment-encoding.md">BOLT-11</a> specification.</p></li><li><strong>r_hash</strong>: <em><span class="required">required</span>(object)</em><p>The payment hash of the invoice. For lookup purposes.</p><h3>Annotations</h3><ul><li><strong>annotation-types.questionable</strong><pre><code>"This property is an implementation detail of the LND rpc api.\nWhy as a buffer representation? Wouldn't a hexadecimal string be\nsufficient?\n"</code></pre></li></ul><ul><li><strong>type</strong>: <em><span class="required">required</span>(string - pattern: ^Buffer$)</em></li><li><strong>data</strong>: <em><span class="required">required</span>(array of integer)</em></li></ul></li><li><strong>add_index</strong>: <em><span class="required">required</span>(integer)</em><p>The "add" index of this invoice. Each newly created invoice will increment this index making it monotonically increasing. Callers to the SubscribeInvoices call can use this to instantly get notified of all added invoices with an add_index greater than this one.</p><h3>Annotations</h3><ul><li><strong>annotation-types.questionable</strong><pre><code>"This property is an implementation detail of the LND rpc api.\nWhy is it exposed to Bluewallet clients? It's potentially\nsensitive information that is leaked.\n"</code></pre></li></ul></li><li><strong>pay_req</strong>: <em><span class="required">required</span>(string - pattern: ^ln(bc|tb)[1-9][0-9]*[munp]1[ac-hj-np-z02-9]{6,}$)</em><p>Same as <code>payment_request</code>. Still here for client backwards compatibility.</p><h3>Annotations</h3><ul><li><strong>annotation-types.deprecated</strong></li></ul></li></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "timestamp": 1535054434,
+    "type": "user_invoice",
+    "amt": 12,
+    "description": "tip",
+    "ispaid": true,
+    "expire_time": 3600,
+    "payment_hash": "18cfd986f49569a3276624dbc02bdc7fdfa57053f9dd0d4e7fa5902e9c926de5",
+    "payment_request": "lnbc10u1pwenn70pp5c25zh2denvxvthesgtt6kphgudck95v7xewnf2tmyujp50d0svksdqqcqzpgcale3550tlvx75pjj59rtg6lukvs52s2al7v0xnmry9399eqe03sx3nlp9758al5l7j6xrzlr49q2c9cux4gl7fart2j9ammfp4f26cqxtyghg",
+    "add_index": 104719,
+    "r_hash": {
+      "type": "Buffer",
+      "data": [
+        194,
+        168,
+        43,
+        169,
+        185,
+        155,
+        12,
+        197,
+        223,
+        48,
+        66,
+        215,
+        171,
+        6,
+        232,
+        227,
+        113,
+        98,
+        209,
+        158,
+        54,
+        93,
+        52,
+        123,
+        39,
+        36,
+        26,
+        61,
+        175,
+        131,
+        45
+      ]
+    },
+    "pay_req": "lnbc10u1pwenn70pp5c25zh2denvxvthesgtt6kphgudck95v7xewnf2tmyujp50d0svksdqqcqzpgcale3550tlvx75pjj59rtg6lukvs52s2al7v0xnmry9399eqe03sx3nlp9758al5l7j6xrzlr49q2c9cux4gl7fart2j9ammfp4f26cqxtyghg"
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/429" target="_blank">429</a></h2><p>Error response when the rate limit of requests was reached.</p><h3>Headers</h3><ul><li><strong>X-Ratelimit-Limit</strong>: <em><span class="required">required</span>(integer)</em><p>The request limit per time window</p></li><li><strong>X-Ratelimit-Remaining</strong>: <em><span class="required">required</span>(integer)</em><p>The number of requests left for the time window</p></li><li><strong>X-Ratelimit-Reset</strong>: <em><span class="required">required</span>(integer)</em><p>The remaining window before the rate limit resets in UTC epoch seconds</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Too many requests, please try again later.</code></pre></div></div><div class="tab-pane" id="getuserinvoices_get_securedby"><h1>Secured by Access Token (Pass Through)</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em><p>The <code>access_token</code> obtained via the /auth request</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Error response when wrong credentials where provided.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 1,
+  "message": "bad auth"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="decodeinvoice" class="panel-title">Decode Lightning Invoice</h3></div><div class="panel-body"><div class="top-resource-description"><p>Decode a Lightning invoice into a human readable format.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_decodeinvoice"><span class="parent"></span>/decodeinvoice</a> <span class="methods"><a href="#decodeinvoice_get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_decodeinvoice" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#decodeinvoice_get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Decode a BOLT-11 compatible Lightning invoice into a human readable format. Uses the implementation of the connected Lightning node so the client app doesn&#39;t have to implement this.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="decodeinvoice_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/decodeinvoice</h4></div><div class="modal-body"><div class="alert alert-info"><p>Decode a BOLT-11 compatible Lightning invoice into a human readable format. Uses the implementation of the connected Lightning node so the client app doesn&#39;t have to implement this.</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>Access Token (Pass Through)</b><p>This API supports Pass Through Authentication via the <code>Authorization</code> header.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#decodeinvoice_get_request" data-toggle="tab">Request</a></li><li><a href="#decodeinvoice_get_response" data-toggle="tab">Response</a></li><li><a href="#decodeinvoice_get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="decodeinvoice_get_request"><h3>Query Parameters</h3><ul><li><strong>invoice</strong>: <em><span class="required">required</span>(string - pattern: ^ln(bc|tb)[1-9][0-9]*[munp]1[ac-hj-np-z02-9]{6,}$)</em><p>bech32 encoded bitcoin payment request according to the <a href="https://github.com/lightningnetwork/lightning-rfc/blob/master/11-payment-encoding.md">BOLT-11</a> specification.</p></li></ul></div><div class="tab-pane" id="decodeinvoice_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>destination</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>payment_hash</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>num_satoshis</strong>: <em><span class="required">required</span>(integer)</em></li><li><strong>timestamp</strong>: <em><span class="required">required</span>(integer)</em></li><li><strong>expiry</strong>: <em><span class="required">required</span>(integer)</em></li><li><strong>description</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>description_hash</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em></li><li><strong>fallback_addr</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>cltv_expiry</strong>: <em><span class="required">required</span>(integer)</em></li><li><strong>route_hints</strong>: <em>(any)</em></li></ul><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>Returned if the <code>invoice</code> <strong>query parameter</strong> didn&#39;t provide a valid invoice in the BOLT-11 format.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 4,
+  "message": "not a valid invoice"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/429" target="_blank">429</a></h2><p>Error response when the rate limit of requests was reached.</p><h3>Headers</h3><ul><li><strong>X-Ratelimit-Limit</strong>: <em><span class="required">required</span>(integer)</em><p>The request limit per time window</p></li><li><strong>X-Ratelimit-Remaining</strong>: <em><span class="required">required</span>(integer)</em><p>The number of requests left for the time window</p></li><li><strong>X-Ratelimit-Reset</strong>: <em><span class="required">required</span>(integer)</em><p>The remaining window before the rate limit resets in UTC epoch seconds</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Too many requests, please try again later.</code></pre></div></div><div class="tab-pane" id="decodeinvoice_get_securedby"><h1>Secured by Access Token (Pass Through)</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string - pattern: ^[0-9|a-f]+$)</em><p>The <code>access_token</code> obtained via the /auth request</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Error response when wrong credentials where provided.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>code</strong>: <em><span class="required">required</span>(integer - minimum: 0)</em></li><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": true,
+  "code": 1,
+  "message": "bad auth"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#getinfo">Lighting Node Info</a></li><li><a href="#create">Create new account</a></li><li><a href="#auth">Get access token</a></li><li><a href="#balance">Show Account Balance</a></li><li><a href="#getbtc">Show Funding Address</a></li><li><a href="#getpending">Show Pending Deposits</a></li><li><a href="#addinvoice">Create Lightning invoice</a></li><li><a href="#payinvoice">Pay Lightning invoices</a></li><li><a href="#gettxs">Show Transaction History</a></li><li><a href="#getuserinvoices">Show Invoices</a></li><li><a href="#decodeinvoice">Decode Lightning Invoice</a></li></ul></div></div></div></div></body></html>

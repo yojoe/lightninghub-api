@@ -1,0 +1,20 @@
+#%RAML 1.0 DocumentationItem
+title: Error codes
+content: |
+ This API returns errors as a JSON object in the following format:
+ ```json
+ {
+      "error": true,
+      "code": <INTEGER>,
+      "message": "<DESCRIPTION>",
+ }
+ ```
+ The following error `codes` are defined:
+ -  `1` : bad authentication
+ -  `2` : not enough balance
+ -  `4` : not a valid invoice
+ -  `6` : server fault
+ - `7`  : Lightning node failure
+ - `8`  : bad arguments
+ - `9`  : payment in transit
+ - `10` : payment failed

@@ -1,0 +1,32 @@
+#%RAML 1.0 ResourceType
+uses:
+  bolt-types: ../types/bolt-types.raml
+  bluewallet-types: ../types/bluewallet-types.raml
+displayName: Decode Lightning Invoice
+description: |
+  Decode a Lightning invoice into a human readable format.
+get:
+  description: |
+    Decode a BOLT-11 compatible Lightning invoice into a human readable format.
+    Uses the implementation of the connected Lightning node so the client app
+    doesn't have to implement this.
+  queryParameters:
+    invoice: bolt-types.BOLT-11
+  responses:
+    200:
+      body:
+        application/json:
+          displayName: Show Decoded LND PayReq Response
+          type: bluewallet-types.LNDPayReq
+    400:
+      description: |
+        Returned if the `invoice` **query parameter** didn't provide a valid
+        invoice in the BOLT-11 format.
+      body:
+        application/json:
+          type: bluewallet-types.ErrorRespBody
+          displayName: Invalid BOLT-11 Invoice Response
+          example:
+            error: true
+            code: 4
+            message: not a valid invoice

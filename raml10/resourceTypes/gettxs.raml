@@ -1,0 +1,40 @@
+#%RAML 1.0 ResourceType
+uses:
+  bluewallet-types: ../types/bluewallet-types.raml
+  annotation-types: ../types/annotation-types.raml
+displayName: Show Transaction History
+description: |
+  Show the transaction history of authenticated user's account.
+get:
+  description: |
+    Get a list of transactions (deposits and payments) along with their details
+    for the authenticated user's custody account.
+  responses:
+    200:
+      body:
+        application/json:
+          displayName: Show Transaction History Response
+          type: (bluewallet-types.BTCTransaction | bluewallet-types.Payment)[]
+          (annotation-types.questionable): |
+            This resource currently exposes raw bitcoind and lnd RPC types. Not
+            all of that data is used by the client (Bluewallet App).
+          example:
+            - # Funding BTCTransaction
+              amount: 0.00078061
+              account: "521172"
+              address: 3F9seBGCJZQ4WJJHwGhrxeGXCGbrm5SNpF
+              category: receive
+              confirmations: 5
+              blockhash: 0000000000000000000edf18e9ece18e449c6d8eed1f729946b3531c32ee9f57
+              blockindex: 693
+              blocktime: 1535024914
+              txid: 28a74277e47c2d772ee8a40464209c90dce084f3b5de38a2f41b14c79e3bfc62
+              walletconflicts: []
+              time: 1535024434
+              timereceived: 1535024434
+            - # Lightning Payment
+              timestamp: 1535054434
+              type: paid_invoice
+              value: 12
+              fee: 0
+              memo: tip

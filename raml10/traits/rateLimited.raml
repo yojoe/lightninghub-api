@@ -1,0 +1,27 @@
+#%RAML 1.0 Trait
+usage: |
+  This resource is rate-limited and returns an HTTP error when the limit is
+  reached.
+responses:
+  429:
+    description: |
+      Error response when the rate limit of requests was reached.
+    headers:
+      X-Ratelimit-Limit:
+        type: integer
+        description: |
+          The request limit per time window
+      X-Ratelimit-Remaining:
+        type: integer
+        description: |
+          The number of requests left for the time window
+      X-Ratelimit-Reset:
+        type: integer
+        description: |
+          The remaining window before the rate limit resets in UTC epoch seconds
+    body:
+      application/json:
+        type: string
+        default: Too many requests, please try again later.
+        description: Returned when rate limit is reached
+        example: Too many requests, please try again later.

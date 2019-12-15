@@ -1,0 +1,40 @@
+#%RAML 1.0 ResourceType
+uses:
+  base-types: ../types/base-types.raml
+  bluewallet-types: ../types/bluewallet-types.raml
+displayName: Get access token
+description: |
+  Create an access token using your account credentials (login/password), which
+  is needed for most of the API calls.
+post:
+  description: Send user authentication request
+  body:
+    application/json:
+      properties:
+        login: base-types.HexString
+        password: base-types.HexString
+        refresh_token?: base-types.HexString
+      example:
+        login: 04f8996da763b7a969b1
+        password: 5e884898da28047151d0
+  responses:
+    200:
+      description: |
+        Successful user authentication response which provides an `access token`
+        that needs to be send along with all requests that require
+        authentication.
+      body:
+        application/json:
+          properties:
+            access_token: base-types.HexString
+            refresh_token: base-types.HexString
+          example:
+            access_token: bf3771fdebf08fd83a3b4cbe2f0aa3ef4cf957b3
+            refresh_token: f77a47bb198f496c5cb03cf06ac544a6e194637d
+    401:
+      description: |
+        Failed user authentication response when wrong credentials where
+        provided.
+      body:
+        application/json:
+          type: bluewallet-types.BadAuthRespBody

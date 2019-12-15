@@ -1,0 +1,20 @@
+#%RAML 1.0 Library
+types:
+  HexString:
+    type: string
+    pattern: ^[0-9|a-f]+$
+  Bech32Address:
+    type: string
+    pattern: ^(bc|tb)1[ac-hj-np-z02-9]{6,}$
+  Base58Address:
+    type: string
+    pattern: ^[13nm][a-km-zA-HJ-NP-Z1-9]{25,34}$
+  BTCAddress:
+    type: Base58Address | Bech32Address
+  Buffer:
+    type: object
+    properties:
+      type:
+        type: string
+        pattern: ^Buffer$
+      data: integer[]

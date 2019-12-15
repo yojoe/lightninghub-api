@@ -1,0 +1,19 @@
+#%RAML 1.0 ResourceType
+uses:
+  bluewallet-types: ../types/bluewallet-types.raml
+displayName: Show Account Balance
+description: |
+  Show spendable custody account balance of the authenticated user.
+get:
+  description: Send balance information request
+  responses:
+    200:
+      body:
+        application/json:
+          type: object
+          displayName: User's spendable balance
+          properties:
+            BTC: bluewallet-types.Balance
+          example:
+            BTC:
+              AvailableBalance: 0

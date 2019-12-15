@@ -1,0 +1,27 @@
+#%RAML 1.0 ResourceType
+uses:
+  base-types: ../types/base-types.raml
+displayName: Lighting Node Info
+description: Get status information about the connected Lightning node.
+get:
+  description: Send status information request
+  responses:
+    200:
+      body:
+        application/json:
+          displayName: Lighting Node Info Response
+          properties:
+            identity_pubkey?: base-types.HexString
+            alias?: string
+            uris?: string[]
+            version: string
+            num_pending_channels?: integer
+            num_active_channels?: integer
+            num_inactive_channels?: integer
+            num_peers?: integer
+            synced_to_chain: boolean
+            block_height: integer
+            block_hash: base-types.HexString
+            best_header_timestamp: integer
+            testnet: boolean
+            chains: object[]

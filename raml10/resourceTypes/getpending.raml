@@ -1,0 +1,36 @@
+#%RAML 1.0 ResourceType
+uses:
+  bluewallet-types: ../types/bluewallet-types.raml
+  annotation-types: ../types/annotation-types.raml
+displayName: Show Pending Deposits
+description: |
+  Show on-chain funding transactions with less than 3 confirmations for the
+  authenticated user's account. Deposits will only be credited to the user's
+  spendable account balance after the funding transaction received 3 confirmations.
+get:
+  description: |
+    Get a list of pending deposits along with their details
+    for the authenticated user's custody account.
+  responses:
+    200:
+      body:
+        application/json:
+          displayName: Show Transaction History Response
+          type: bluewallet-types.BTCTransaction[]
+          (annotation-types.questionable): |
+            This resource currently exposes raw bitcoind RPC types. Not
+            all of that data is used by the client (Bluewallet App).
+          example:
+            - # Funding BTCTransaction
+              amount: 0.00078061
+              account: "521172"
+              address: 3F9seBGCJZQ4WJJHwGhrxeGXCGbrm5SNpF
+              category: receive
+              confirmations: 1
+              blockhash: 0000000000000000000edf18e9ece18e449c6d8eed1f729946b3531c32ee9f57
+              blockindex: 693
+              blocktime: 1535024914
+              txid: 28a74277e47c2d772ee8a40464209c90dce084f3b5de38a2f41b14c79e3bfc62
+              walletconflicts: []
+              time: 1535024434
+              timereceived: 1535024434

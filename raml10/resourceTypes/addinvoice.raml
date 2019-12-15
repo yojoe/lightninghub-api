@@ -1,0 +1,108 @@
+#%RAML 1.0 ResourceType
+uses:
+  base-types: ../types/base-types.raml
+  bluewallet-types: ../types/bluewallet-types.raml
+  bolt-types: ../types/bolt-types.raml
+  annotation-types: ../types/annotation-types.raml
+displayName: Create Lightning invoice
+description: |
+  Create BOLT-11 compatible Lightning invoices
+post:
+  description: |
+    Request a BOLT-11 compatible Lightning invoice that can be paid by any other
+    BOLT-11 compatible wallet. If the invoice is paid the respective amount
+    will be credited to the authenticated user who created it.
+  body:
+    application/json:
+      displayName: Create Lightning Invoice Request
+      properties:
+        amt:
+          type: integer
+          minimum: 0
+          description: |
+            Requested amount in milli-satoshi (msat)
+        memo?:
+          (annotation-types.questionable): |
+            For a custody lightning wallet this could leak potentially
+            sensitive, private information to the operator of the service.
+            Bluewallet client implementations should at least inform their users
+            about this issue.
+          type: string
+          description: |
+            Optional, short description of purpose of payment, to attach along
+            with the invoice. Used for record keeping purposes for the invoice's
+            creator, and will also be set in the description field of the
+            encoded payment request if the description_hash field is not being
+            used.
+  responses:
+    200:
+      body:
+        application/json:
+          properties:
+            payment_request:
+              type: bolt-types.BOLT-11
+            r_hash:
+              (annotation-types.questionable): |
+                This property is an implementation detail of the LND rpc api.
+                Why as a buffer representation? Wouldn't a hexadecimal string be
+                sufficient?
+              type: base-types.Buffer
+              description: |
+                The payment hash of the invoice. For lookup purposes.
+            add_index:
+              (annotation-types.questionable): |
+                This property is an implementation detail of the LND rpc api.
+                Why is it exposed to Bluewallet clients? It's potentially
+                sensitive information that is leaked.
+              type: integer
+              description: |
+                The "add" index of this invoice. Each newly created invoice will
+                increment this index making it monotonically increasing. Callers
+                to the SubscribeInvoices call can use this to instantly get
+                notified of all added invoices with an add_index greater than
+                this one.
+            pay_req:
+              (annotation-types.deprecated):
+              type: bolt-types.BOLT-11
+              description: |
+                Same as `payment_request`. Still here for client backwards
+                compatibility.
+          example:
+            payment_request: lnbc10u1pwenn70pp5c25zh2denvxvthesgtt6kphgudck95v7xewnf2tmyujp50d0svksdqqcqzpgcale3550tlvx75pjj59rtg6lukvs52s2al7v0xnmry9399eqe03sx3nlp9758al5l7j6xrzlr49q2c9cux4gl7fart2j9ammfp4f26cqxtyghg
+            add_index: 104719
+            r_hash:
+              type: Buffer
+              data:
+                - 194
+                - 168
+                - 43
+                - 169
+                - 185
+                - 155
+                - 12
+                - 197
+                - 223
+                - 48
+                - 66
+                - 215
+                - 171
+                - 6
+                - 232
+                - 227
+                - 113
+                - 98
+                - 209
+                - 158
+                - 54
+                - 93
+                - 52
+                - 169
+                - 123
+                - 39
+                - 36
+                - 26
+                - 61
+                - 175
+                - 131
+                - 45
+            pay_req: lnbc10u1pwenn70pp5c25zh2denvxvthesgtt6kphgudck95v7xewnf2tmyujp50d0svksdqqcqzpgcale3550tlvx75pjj59rtg6lukvs52s2al7v0xnmry9399eqe03sx3nlp9758al5l7j6xrzlr49q2c9cux4gl7fart2j9ammfp4f26cqxtyghg
