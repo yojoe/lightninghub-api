@@ -19,6 +19,9 @@ Please see [Atom](https://atom.io/) based http://apiworkbench.com/ for tools to
 work with RAML 1.0 files. For more tools have a look at
 https://raml.org/projects.
 
+Please have a look into the [raml10/api.raml](raml10/api.raml) file, which is 
+the root document (starting point) of the LightningHub API specification.
+
 # Code generation
 Client and server code can be automatically generated for various programming
 languages and frameworks. Please see the `/docs` folder for details.
