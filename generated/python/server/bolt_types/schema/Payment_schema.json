@@ -1,0 +1,37 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"properties": {
+		"fee": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"memo": {
+			"type": [
+				"string",
+				"null"
+			]
+		},
+		"timestamp": {
+			"type": "integer"
+		},
+		"type": {
+			"type": "string",
+			"enum": [
+				"bitcoind_tx",
+				"paid_invoice",
+				"user_invoice"
+			]
+		},
+		"value": {
+			"type": "integer",
+			"minimum": 0
+		}
+	},
+	"required": [
+		"fee",
+		"timestamp",
+		"type",
+		"value"
+	]
+}

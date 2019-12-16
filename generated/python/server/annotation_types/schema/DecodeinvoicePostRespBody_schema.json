@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"properties": {
+		"add_index": {
+			"type": "integer"
+		},
+		"pay_req": {
+			"$ref": "bolt-types.BOLT-11_schema.json"
+		},
+		"payment_request": {
+			"$ref": "bolt-types.BOLT-11_schema.json"
+		},
+		"r_hash": {
+			"$ref": "base-types.Buffer_schema.json"
+		}
+	},
+	"required": [
+		"add_index",
+		"pay_req",
+		"payment_request",
+		"r_hash"
+	]
+}

@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"properties": {
+		"invoice": {
+			"$ref": "bolt-types.BOLT-11_schema.json"
+		}
+	},
+	"required": [
+		"invoice"
+	]
+}

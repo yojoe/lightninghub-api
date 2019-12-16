@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"properties": {
+		"payment_error": {
+			"type": "string"
+		},
+		"payment_hash": {
+			"$ref": "base-types.Buffer_schema.json"
+		},
+		"payment_preimage": {
+			"$ref": "base-types.Buffer_schema.json"
+		},
+		"payment_route": {
+			"type": "object"
+		}
+	},
+	"required": [
+		"payment_error",
+		"payment_hash",
+		"payment_preimage",
+		"payment_route"
+	]
+}

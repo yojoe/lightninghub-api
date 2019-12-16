@@ -1,0 +1,47 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"properties": {
+		"cltv_expiry": {
+			"type": "integer"
+		},
+		"description": {
+			"type": "string"
+		},
+		"description_hash": {
+			"$ref": "base-types.HexString_schema.json"
+		},
+		"destination": {
+			"type": "string"
+		},
+		"expiry": {
+			"type": "integer"
+		},
+		"fallback_addr": {
+			"type": "string"
+		},
+		"num_satoshis": {
+			"type": "integer"
+		},
+		"payment_hash": {
+			"$ref": "base-types.HexString_schema.json"
+		},
+		"route_hints": {
+			"$ref": "any_schema.json"
+		},
+		"timestamp": {
+			"type": "integer"
+		}
+	},
+	"required": [
+		"cltv_expiry",
+		"description",
+		"description_hash",
+		"destination",
+		"expiry",
+		"fallback_addr",
+		"num_satoshis",
+		"payment_hash",
+		"timestamp"
+	]
+}

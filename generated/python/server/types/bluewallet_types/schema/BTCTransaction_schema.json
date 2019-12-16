@@ -1,0 +1,61 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"properties": {
+		"account": {
+			"type": "string"
+		},
+		"address": {
+			"$ref": "base-types.BTCAddress_schema.json"
+		},
+		"amount": {
+			"type": "number"
+		},
+		"blockhash": {
+			"$ref": "base-types.HexString_schema.json"
+		},
+		"blockindex": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"blocktime": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"category": {
+			"type": "string"
+		},
+		"confirmations": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"time": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"timereceived": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"txid": {
+			"$ref": "base-types.HexString_schema.json"
+		},
+		"walletconflicts": {
+			"$ref": "any_schema.json"
+		}
+	},
+	"required": [
+		"account",
+		"address",
+		"amount",
+		"blockhash",
+		"blockindex",
+		"blocktime",
+		"category",
+		"confirmations",
+		"time",
+		"timereceived",
+		"txid",
+		"walletconflicts"
+	]
+}

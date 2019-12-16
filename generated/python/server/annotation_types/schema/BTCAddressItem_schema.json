@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"properties": {
+		"address": {
+			"$ref": "base-types.Bech32Address_schema.json"
+		}
+	},
+	"required": [
+		"address"
+	]
+}

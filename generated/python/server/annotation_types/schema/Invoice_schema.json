@@ -1,0 +1,55 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"properties": {
+		"add_index": {
+			"type": "integer"
+		},
+		"amt": {
+			"type": "integer"
+		},
+		"description": {
+			"type": "string"
+		},
+		"expire_time": {
+			"type": "integer"
+		},
+		"ispaid": {
+			"type": "boolean"
+		},
+		"pay_req": {
+			"$ref": "bolt-types.BOLT-11_schema.json"
+		},
+		"payment_hash": {
+			"$ref": "base-types.HexString_schema.json"
+		},
+		"payment_request": {
+			"$ref": "bolt-types.BOLT-11_schema.json"
+		},
+		"r_hash": {
+			"$ref": "base-types.Buffer_schema.json"
+		},
+		"timestamp": {
+			"type": "integer"
+		},
+		"type": {
+			"type": "string",
+			"enum": [
+				"user_invoice"
+			]
+		}
+	},
+	"required": [
+		"add_index",
+		"amt",
+		"description",
+		"expire_time",
+		"ispaid",
+		"pay_req",
+		"payment_hash",
+		"payment_request",
+		"r_hash",
+		"timestamp",
+		"type"
+	]
+}
