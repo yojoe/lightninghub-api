@@ -14,7 +14,9 @@ get:
       body:
         application/json:
           displayName: Show Transaction History Response
-          type: (bluewallet-types.BTCTransaction | bluewallet-types.Payment)[]
+          #type: (bluewallet-types.BTCTransaction | bluewallet-types.Payment)[]
+          # union type not yet supported by go-raml (see https://github.com/Jumpscale/go-raml/issues/263)
+          type: object[]
           (annotation-types.questionable): |
             This resource currently exposes raw bitcoind and lnd RPC types. Not
             all of that data is used by the client (Bluewallet App).

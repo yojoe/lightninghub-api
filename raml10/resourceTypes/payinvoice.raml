@@ -32,7 +32,9 @@ post:
         doesn't seem to use any of the data provided in the response body.
       body:
         application/json:
-          type: object | bluewallet-types.LNDSendResponse | bluewallet-types.LNDPayReq
+          #type: object | bluewallet-types.LNDSendResponse | bluewallet-types.LNDPayReq
+          # union type not yet supported by go-raml (see https://github.com/Jumpscale/go-raml/issues/263)
+          type: object
     400:
       body:
         application/json:
