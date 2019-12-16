@@ -16,7 +16,7 @@ The HTML documentation can be re-generated using the `raml2html.sh` file in the
 
 # API Spec design & development
 Please see [Atom](https://atom.io/) based http://apiworkbench.com/ for tools to
-work with RAML 1.0 files. For other tools have a look at
+work with RAML 1.0 files. For more tools have a look at
 https://raml.org/projects.
 
 # Code generation
