@@ -10,7 +10,7 @@ jsonschema==2.6.0
 six==1.11.0
 python-jose==2.0.2
 pycrypto==2.6.1
-pycryptodome==3.5.1
+pycryptodome==3.6.6
 click==6.7
 ecdsa==0.13
 future==0.16.0
