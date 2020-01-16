@@ -12,5 +12,5 @@ python-jose==2.0.2
 pycrypto==2.6.1
 pycryptodome==3.5.1
 click==6.7
-ecdsa==0.13
+ecdsa==0.13.3
 future==0.16.0
